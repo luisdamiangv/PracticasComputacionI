@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/damia/CLionProjects/CargaElectrica/Grupo.cpp
+Grupo.h
+C:/Users/damia/CLionProjects/CargaElectrica/Grupo.h
+
+C:/Users/damia/CLionProjects/CargaElectrica/Grupo.h
+string
+-
+
+C:/Users/damia/CLionProjects/CargaElectrica/main.cpp
+iostream
+-
+array
+-
+string
+-
+Grupo.h
+C:/Users/damia/CLionProjects/CargaElectrica/Grupo.h
+
