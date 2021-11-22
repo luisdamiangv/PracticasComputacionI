@@ -1,82 +1,95 @@
-[Project]
-filename=Puntos.cpp
-name=Puntos
-Type=0
-Ver=2
-ObjFiles=
-Includes=
-Libs=
-PrivateResource=
-ResourceIncludes=
-MakeIncludes=
-Compiler=
-CppCompiler=
-Linker=
-IsCpp=1
-Icon=
-ExeOutput=
-ObjectOutput=
-LogOutput=
-LogOutputEnabled=0
-OverrideOutput=0
-OverrideOutputName=
-HostApplication=
-UseCustomMakefile=0
-CustomMakefile=
-CommandLine=
-Folders=
-IncludeVersionInfo=0
-SupportXPThemes=0
-CompilerSet=0
-CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;4;0;0;0
-UnitCount=3
+#include <iostream>
+#include <array>
 
-[VersionInfo]
-Major=1
-Minor=0
-Release=0
-Build=0
-LanguageID=1033
-CharsetID=1252
-CompanyName=
-FileVersion=
-FileDescription=Developed using the Dev-C++ IDE
-InternalName=
-LegalCopyright=
-LegalTrademarks=
-OriginalFilename=
-ProductName=
-ProductVersion=
-AutoIncBuildNr=0
-SyncProduct=1
+// Incluimos nuestro encabezado con la definición de la clase Punto2D
+#include "Punto.h"
 
-[Unit1]
-FileName=POO\main.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+using namespace std;
 
-[Unit2]
-FileName=POO\Punto.h
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+// Declaración de funciones
+void PedirValores(float& x, float& y); //Estas variables x y y pertenecen a la clase Punto, ¿o no?
+char PedirOperacion();
 
-[Unit3]
-FileName=POO\Punto.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+int main()
+{
+    // Creamos un OBJETO de la clase Punto2D
+    Punt miPunto;
 
+    float x = 0, y = 0, temp1 = 0, temp2 = 0;
+    char operacion;
+
+    // Pedimos al usuario que ingrese las coordenadas iniciales del punto en el plano
+    cout << "\t\tIngresa la posicion inicial del punto:\n ";
+
+    //Valores por referencia
+    PedirValores(x, y);
+
+    // Modificamos las coordenadas del objeto
+    miPunto.SetPosicion(x, y);
+
+    // solicitamos al usuario que ingrese una operación válida a realizar
+    //función global
+    operacion = PediOrperacion();
+    // Similar a un if, pero con otra estructura.
+    switch (operacion)
+    {
+        // Si operacion == 't' entonces realiza lo siguiente
+        case 't':
+            // Solicitamos al usuario las coordenadas a desplazar el punto para cada eje
+            cout << "Ingresa los valores a desplazar para cada eje:\n ";
+            PedirValores(temp1, temp2);
+            // Trasladamos el objeto (modificamos sus coordenadas)
+            miPunto.Translate(temp1, temp2);
+            // Salimos del switch
+            break;
+
+        // Si operaciosn == 'r' entonces realiza lo siguiente
+        case 'r':
+            // Solicita al usuario ingrese el valor del ángulo a rotar
+            cout << "Ingresa el valor del angulo a rotar (en grados): ";
+            cin >> temp1;
+            // Rota el punto en el plano con respecto al origen
+            miPunto.Rotate(temp1);
+            break;
+
+        // Si operacion == 'e' entonces realiza lo siguiente
+        case 'e':
+            // solicita al usuario que ingrese el factor de escala para cada eje
+            cout << "\t\tIngresa los factores a escalar para cada eje\n";
+
+            //Función local, tan útil como las pertenecientes a la clase
+            PedirValores(temp1, temp2);
+            miPunto.Scalar(temp1, temp2);
+            break;
+
+        // Si ninguno de los casos anteriores se cumplió, entonces realiza lo siguiente
+        default:
+            cout << "\t\tOperacion no valida\n";
+            break;
+    }
+    // Imprime la posición final del punto después de las transformaciones
+    cout << "Posicion final:\n";
+    cout << "[ " << miPunto.GetX() << " " << miPunto.GetY() << " ]";
+    // Si terminamos correctamente la ejecución del programa, regresamos 0
+    return 0;
+}
+
+// Solicita dos valores de punto flotante al usuario y modifícalos por referencia
+void PedirValores(float& x, float& y) //el amperson al final indica modificiación por referencia
+{
+    cout << "Valor en x: ";
+    cin >> x;
+    cout << "Valor en y: ";
+    cin >> y;
+}
+
+// Solicita una operación válida al usuario
+char PedirOperacion()
+{
+    char op;
+    do {
+        cout << "Ingrese operacion ('t' para trasladar, 'r' para rotar, 'e' para escalar): ";
+        cin >> op;
+    } while (op != 't' && op != 'r' && op != 'e'); //ingrese opción válida
+    return op;
+}

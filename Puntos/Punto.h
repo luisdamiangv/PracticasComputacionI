@@ -1,21 +1,32 @@
-#include <array>
+//
+// Created by Luis Damián on 21/11/2021.
+//
 
-#indef PUNTOS_PUNTO_H
+#ifndef PUNTOS_PUNTO_H
 #define PUNTOS_PUNTO_H
 
-class punto2D 
-	{
-	public://Declaración de funciones
-		punto2D();
-			 
-			void setPosition (double a, double b); 
-			float scalar (float t1, float t2);
-			float transfer (float t1, float t2);
-			float rotateRespectOrigin(float t1);
-			[[no discard]] float getX() const; getY() const;
-		
-	private: //Declaración de atributos
-			float x;
-			float y;
-	};
+class Punto {
+public:
+    //Constructor
+    Punto();
+
+    //Setters
+    void SetX(float _X);
+    void SetY(float _Y);
+
+    //Getters
+    float GetX();
+    float GetY();
+
+    //Other functions
+    void Translate(float x, float y);
+    void SetPosicion(float x, float y); //Función indispensable
+    void Rotate(float temp1);
+    void Scalar(float temp1, float temp2);
+
+private:
+    float a,b; //Variables
+};
+
+
 #endif //PUNTOS_PUNTO_H
