@@ -1,5 +1,9 @@
+//
+// Created by Luis Damián on 13/10/2021
+
+
 #include <iostream>
-#include <array>
+
 
 // Incluimos nuestro encabezado con la definición de la clase Punto2D
 #include "Punto.h"
@@ -7,14 +11,15 @@
 using namespace std;
 
 // Declaración de funciones
-void PedirValores(float& x, float& y); //Estas variables x y y pertenecen a la clase Punto, ¿o no?
+void PedirValores(float& x, float& y);
 char PedirOperacion();
 
 int main()
 {
     // Creamos un OBJETO de la clase Punto2D
-    Punt miPunto;
+    Punto2D miPunto;
 
+    //Variables locales
     float x = 0, y = 0, temp1 = 0, temp2 = 0;
     char operacion;
 
@@ -29,7 +34,7 @@ int main()
 
     // solicitamos al usuario que ingrese una operación válida a realizar
     //función global
-    operacion = PediOrperacion();
+    operacion = PedirOperacion();
     // Similar a un if, pero con otra estructura.
     switch (operacion)
     {
@@ -39,7 +44,7 @@ int main()
             cout << "Ingresa los valores a desplazar para cada eje:\n ";
             PedirValores(temp1, temp2);
             // Trasladamos el objeto (modificamos sus coordenadas)
-            miPunto.Translate(temp1, temp2);
+            miPunto.Trasladar(temp1, temp2);
             // Salimos del switch
             break;
 
@@ -49,7 +54,7 @@ int main()
             cout << "Ingresa el valor del angulo a rotar (en grados): ";
             cin >> temp1;
             // Rota el punto en el plano con respecto al origen
-            miPunto.Rotate(temp1);
+            miPunto.RotarRespectoAlOrigen(temp1);
             break;
 
         // Si operacion == 'e' entonces realiza lo siguiente
@@ -59,7 +64,7 @@ int main()
 
             //Función local, tan útil como las pertenecientes a la clase
             PedirValores(temp1, temp2);
-            miPunto.Scalar(temp1, temp2);
+            miPunto.Escalar(temp1, temp2);
             break;
 
         // Si ninguno de los casos anteriores se cumplió, entonces realiza lo siguiente
